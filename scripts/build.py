@@ -113,11 +113,6 @@ def motif(kind, col):
             out += f'<rect x="{370 + i * 42}" y="34" width="34" height="28" rx="4" fill="{col}"/>'
         return out + (f'<path d="M200 48H356" stroke="{col}" stroke-width="2" stroke-dasharray="6 6" class="d"/>'
                       f'<path d="M350 41l9 7-9 7" fill="none" stroke="{col}" stroke-width="2"/>')
-    if kind == "graph":
-        nodes = [(30, 48), (150, 18), (150, 78), (290, 48), (420, 18), (510, 70)]
-        edges = [(0, 1), (0, 2), (1, 3), (2, 3), (3, 4), (3, 5)]
-        out = "".join(f'<path d="M{nodes[a][0]} {nodes[a][1]}L{nodes[b][0]} {nodes[b][1]}" stroke="{col}" stroke-width="2" opacity=".6" class="d" stroke-dasharray="6 6"/>' for a, b in edges)
-        return out + "".join(f'<circle cx="{x}" cy="{y}" r="11" fill="{PANEL}" stroke="{col}" stroke-width="2.5"/>' for x, y in nodes)
     if kind == "exec":
         pts = []
         for i in range(0, 91, 3):
@@ -172,12 +167,6 @@ def motif(kind, col):
         out = "".join(f'<path d="M{cx} {cy}L{x:.1f} {y:.1f}" stroke="{col}" stroke-width="2" stroke-dasharray="6 6" opacity=".6" class="d"/>' for x, y in nodes)
         out += "".join(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="9" fill="{PANEL}" stroke="{col}" stroke-width="2.5"/>' for x, y in nodes)
         return out + f'<circle cx="{cx}" cy="{cy}" r="14" fill="{col}"/>'
-    if kind == "draw":
-        pts = " ".join(f"{x * 3},{48 + 28 * math.sin(x / 9) * math.cos(x / 23):.1f}" for x in range(0, 75))
-        return (f'<polyline points="{pts}" fill="none" stroke="{col}" stroke-width="3" stroke-linecap="round"/>'
-                f'<rect x="262" y="16" width="96" height="64" rx="4" fill="none" stroke="{AMBER}" stroke-width="2.5"/>'
-                f'<circle cx="425" cy="48" r="33" fill="none" stroke="{BLUE}" stroke-width="2.5"/>'
-                f'<path d="M478 76L530 22M530 22h-20M530 22v20" fill="none" stroke="{RED}" stroke-width="2.5"/>')
     return ""
 
 
@@ -191,9 +180,7 @@ def cards():
             ("cf", "Codeforces-Analyzer", "Timed Codeforces practice that estimates a rating from problem difficulty, solve time, attempts and hints.", ["React", "Chart.js", "Live demo"], "steps", GREEN),
             ("viz", "Algorithm-Visualizer", "Interactive web app that shows fundamental algorithms one operation at a time.", ["React", "Algorithms", "Live demo"], "sort", BLUE),
             ("mssa", "robust-mssa", "Robust multivariate singular spectrum analysis that extracts latent factors from financial time series containing sparse outliers.", ["Python", "Time series", "Research"], "series", BLUE),
-            ("agents", "private-multi-agent-llm", "Optimizes privacy-utility trade-offs in distributed large language model agent networks using metaheuristic search.", ["Python", "LLM agents", "Research"], "agents", VIOLET),
-            ("split", "spliteasy", "Splitwise-style expense sharing with groups, flexible splits, expense chat and settle-up.", ["Next.js", "Postgres", "Live demo"], "graph", GREEN),
-            ("board", "Whiteboard", "Drawing app with accounts, saved canvases and real-time sync over Socket.IO.", ["React", "Socket.IO", "Live demo"], "draw", AMBER)]
+            ("agents", "private-multi-agent-llm", "Optimizes privacy-utility trade-offs in distributed large language model agent networks using metaheuristic search.", ["Python", "LLM agents", "Research"], "agents", VIOLET)]
     for key, name, desc, tags, kind, col in data:
         W, H = 590, 290
         txt = "".join(f'<text x="24" y="{190 + i * 22}" font-family="{SANS}" font-size="16" fill="{MUTED}">{escape(l)}</text>' for i, l in enumerate(wrap(desc, 68)))
@@ -293,7 +280,7 @@ if __name__ == "__main__":
         scoreboard()
         cards()
         buttons()
-        for name, text in (("results", "cat results.log"), ("trading", "ls ~/trading"), ("algo", "ls ~/algorithms-and-bots"), ("research", "ls ~/research"), ("apps", "ls ~/apps"), ("live", "watch stats"),
+        for name, text in (("results", "cat results.log"), ("trading", "ls ~/trading"), ("algo", "ls ~/algorithms-and-bots"), ("research", "ls ~/research"), ("live", "watch stats"),
                            ("stack", "which tools"), ("activity", "git log --graph")):
             title(name, text)
     live()

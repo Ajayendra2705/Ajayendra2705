@@ -31,12 +31,6 @@
   <a href="https://github.com/Ajayendra2705/private-multi-agent-llm"><img src="assets/card-agents.svg?v=3" width="49%" alt="private-multi-agent-llm"></a>
 </p>
 
-<img src="assets/title-apps.svg?v=3" width="100%" alt="Apps">
-<p align="center">
-  <a href="https://github.com/Ajayendra2705/spliteasy"><img src="assets/card-split.svg?v=3" width="49%" alt="spliteasy"></a>
-  <a href="https://github.com/Ajayendra2705/Whiteboard"><img src="assets/card-board.svg?v=3" width="49%" alt="Whiteboard"></a>
-</p>
-
 <img src="assets/title-live.svg?v=3" width="100%" alt="Live stats">
 <p align="center"><img src="assets/live.svg?v=3" width="100%" alt="Codeforces rating history and language breakdown, updated daily"></p>
 
