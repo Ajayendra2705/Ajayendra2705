@@ -40,47 +40,11 @@ def wrap(text, n):
 
 
 def hero():
-    W, H = 1200, 360
-    rnd = random.Random(2705)
-    grid = "".join(f'<path d="M{x} 0V316" stroke="#131a23"/>' for x in range(0, W, 60))
-    grid += "".join(f'<path d="M0 {y}H{W}" stroke="#131a23"/>' for y in range(40, 316, 60))
-    price, candles, n = 250.0, "", 30
-    for i in range(n):
-        o = price
-        c = o + rnd.uniform(-18, 14) - 2.6  # drifts upward on screen
-        hi, lo = min(o, c) - rnd.uniform(3, 14), max(o, c) + rnd.uniform(3, 14)
-        price = max(70.0, min(285.0, c))
-        col = GREEN if c < o else RED
-        x = 650 + i * 17.5
-        top, height = min(o, c), max(abs(c - o), 3)
-        cls = "live" if i == n - 1 else "c"
-        candles += (f'<g class="{cls}" style="animation-delay:{i * .07:.2f}s">'
-                    f'<path d="M{x + 5:.1f} {hi:.1f}V{lo:.1f}" stroke="{col}" stroke-width="1.5"/>'
-                    f'<rect x="{x:.1f}" y="{top:.1f}" width="10" height="{height:.1f}" rx="1.5" fill="{col}"/></g>')
-    items = ["AMS DERIVE NATIONAL RANK 6", "IMC PROSPERITY 4 MANUAL GLOBAL RANK 24", "CODEFORCES 1955 CANDIDATE MASTER",
-             "QUANTFEST CODING ROUND RANK 21", "QUANTSTORM TOP 40 FINALIST", "AKUNA CHALLENGE 18.7/20",
-             "IICPC CODEFEST PRELIMS RANK 356", "BATTLECODE INTERNATIONAL RANK 21", "INTEGRAL CUP TOP 400"]
-    x, tape = 0, ""
-    for it in items:
-        tape += f'<text x="{x}" y="344" class="t"><tspan fill="{GREEN}">&#9650; </tspan>{it}</text>'
-        x += int((len(it) + 2) * 8.5) + 48
-    css = (f"@keyframes r{{from{{opacity:0;transform:translateY(14px)}}to{{opacity:1;transform:none}}}}"
-           f"@keyframes p{{0%,100%{{opacity:1}}50%{{opacity:.35}}}}"
-           f"@keyframes s{{to{{transform:translateX(-{x}px)}}}}"
-           f"@keyframes b{{50%{{opacity:0}}}}"
-           f".c{{animation:r .5s ease-out both}}.live{{animation:r .5s ease-out 2s both,p 1.6s ease-in-out 2.6s infinite}}"
-           f".tape{{animation:s 45s linear infinite}}.cur{{animation:b 1.1s step-end infinite}}"
-           f".t{{font:600 14px {MONO};fill:#c3ccd8;letter-spacing:.3px}}")
-    body = (f'<rect width="{W}" height="{H}" fill="{BG}"/>{grid}{candles}'
-            f'<path d="M640 {price:.1f}H1190" stroke="{AMBER}" stroke-dasharray="4 5" opacity=".55"/>'
-            f'<text x="56" y="92" font-family="{MONO}" font-size="15" fill="{GREEN}" letter-spacing="1.5">IIT KHARAGPUR / CLASS OF 2027</text>'
-            f'<text x="54" y="162" font-family="{SANS}" font-size="62" font-weight="700" fill="{TEXT}">Ajayendra</text>'
-            f'<text x="54" y="228" font-family="{SANS}" font-size="62" font-weight="700" fill="{TEXT}">Bansod</text>'
-            f'<text x="56" y="272" font-family="{MONO}" font-size="16" fill="{MUTED}">trading systems / quant research / algorithms'
-            f'<tspan class="cur" fill="{GREEN}"> &#9608;</tspan></text>'
-            f'<rect y="316" width="{W}" height="44" fill="{PANEL}"/><path d="M0 316H{W}" stroke="{LINE}"/>'
-            f'<g class="tape">{tape}<g transform="translate({x} 0)">{tape}</g></g>')
-    write("hero.svg", svg(W, H, body, css, "Ajayendra Bansod: trading systems, quant research, algorithms"))
+    W, H = 1200, 210
+    body = (f'<rect x=".5" y=".5" width="{W - 1}" height="{H - 1}" rx="12" fill="{PANEL}" stroke="{LINE}"/>'
+            f'<text x="48" y="104" font-family="{SANS}" font-size="60" font-weight="700" fill="{TEXT}">Ajayendra Bansod</text>'
+            f'<text x="50" y="152" font-family="{MONO}" font-size="19" fill="{MUTED}">Trading systems, quant research and algorithms. IIT Kharagpur, Class of 2027.</text>')
+    write("hero.svg", svg(W, H, body, "", "Ajayendra Bansod: trading systems, quant research and algorithms. IIT Kharagpur, Class of 2027."))
 
 
 def title(name, text):

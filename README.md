@@ -1,4 +1,4 @@
-<p align="center"><img src="assets/hero.svg" width="100%" alt="Ajayendra Bansod: trading systems, quant research, algorithms"></p>
+<p align="center"><img src="assets/hero.svg" width="100%" alt="Ajayendra Bansod: trading systems, quant research and algorithms. IIT Kharagpur, Class of 2027."></p>
 
 <p align="center">
   <a href="https://www.linkedin.com/in/ajayendra2705/"><img src="assets/btn-linkedin.svg" height="44" alt="LinkedIn"></a>&nbsp;
