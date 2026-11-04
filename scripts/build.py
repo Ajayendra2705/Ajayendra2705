@@ -57,9 +57,9 @@ def hero():
         candles += (f'<g class="{cls}" style="animation-delay:{i * .07:.2f}s">'
                     f'<path d="M{x + 5:.1f} {hi:.1f}V{lo:.1f}" stroke="{col}" stroke-width="1.5"/>'
                     f'<rect x="{x:.1f}" y="{top:.1f}" width="10" height="{height:.1f}" rx="1.5" fill="{col}"/></g>')
-    items = ["CODEFORCES 1955 CANDIDATE MASTER", "AMS DERIVE NATIONAL RANK 6", "CODECHEF 1979 4 STAR",
-             "2,500+ PROBLEMS SOLVED", "RAMANUJAN MATHS ROUND 1 RANK 6", "QUANTFEST CODING ROUND RANK 21",
-             "AKUNA CHALLENGE 18.7/20", "QUANTSTORM TOP 40 FINALIST"]
+    items = ["AMS DERIVE NATIONAL RANK 6", "IMC PROSPERITY 4 MANUAL GLOBAL RANK 24", "CODEFORCES 1955 CANDIDATE MASTER",
+             "QUANTFEST CODING ROUND RANK 21", "QUANTSTORM TOP 40 FINALIST", "AKUNA CHALLENGE 18.7/20",
+             "IICPC CODEFEST PRELIMS RANK 356", "BATTLECODE INTERNATIONAL RANK 21", "INTEGRAL CUP TOP 400"]
     x, tape = 0, ""
     for it in items:
         tape += f'<text x="{x}" y="344" class="t"><tspan fill="{GREEN}">&#9650; </tspan>{it}</text>'
@@ -93,20 +93,25 @@ def title(name, text):
 
 
 def scoreboard():
-    tiles = [("#6", "AMS Derive", "of 2,500+ nationally", GREEN), ("1955", "Codeforces max rating", "Candidate Master", BLUE),
-             ("2,500+", "problems solved", "Codeforces", BLUE), ("1979", "CodeChef max rating", "4 Star", AMBER),
-             ("#6", "Ramanujan Maths Competition", "Round 1, 96 of 120", GREEN), ("#21", "IICPC QuantFest", "coding round", GREEN),
-             ("18.7/20", "Akuna trading challenge", "market-making autograder", AMBER), ("Top 40", "QuantStorm", "national finalist", AMBER)]
-    tw, th, gap, body = 288, 132, 16, ""
+    tiles = [("#6", "AMS Derive", "national rank, of 2,500+", GREEN),
+             ("#24", "IMC Prosperity 4", "global, manual trading, of ~19k teams", AMBER),
+             ("1955", "Codeforces", "Candidate Master / CodeChef 4 Star", BLUE),
+             ("#21", "IICPC QuantFest", "coding round / Regionals rank 243", GREEN),
+             ("Top 40", "QuantStorm", "national finalist, market making", AMBER),
+             ("18.7/20", "Akuna trading challenge", "market-making autograder", AMBER),
+             ("#356", "IICPC Codefest", "Prelims, top 2.5% of 13,800+", BLUE),
+             ("#21", "Cambridge Battlecode", "international ladder, 517 teams, Nov 2026", VIOLET),
+             ("Top 400", "Integral Cup", "of 3,100+, backed by Optiver", GREEN)]
+    tw, th, gap, body = 389, 132, 16, ""
     for i, (val, lab, sub, col) in enumerate(tiles):
-        x, y = (i % 4) * (tw + gap), (i // 4) * (th + gap)
+        x, y = (i % 3) * (tw + gap), (i // 3) * (th + gap)
         body += (f'<g class="f" style="animation-delay:{i * .08:.2f}s"><rect x="{x + .5}" y="{y + .5}" width="{tw - 1}" height="{th - 1}" rx="10" fill="{PANEL}" stroke="{LINE}"/>'
                  f'<rect x="{x}" y="{y + 22}" width="3" height="46" fill="{col}"/>'
                  f'<text x="{x + 22}" y="{y + 60}" font-family="{SANS}" font-size="42" font-weight="700" fill="{TEXT}">{val}</text>'
-                 f'<text x="{x + 22}" y="{y + 92}" font-family="{SANS}" font-size="15" font-weight="600" fill="{TEXT}">{lab}</text>'
-                 f'<text x="{x + 22}" y="{y + 113}" font-family="{MONO}" font-size="12.5" fill="{MUTED}">{sub}</text></g>')
+                 f'<text x="{x + 22}" y="{y + 92}" font-family="{SANS}" font-size="16" font-weight="600" fill="{TEXT}">{lab}</text>'
+                 f'<text x="{x + 22}" y="{y + 114}" font-family="{MONO}" font-size="13" fill="{MUTED}">{sub}</text></g>')
     css = "@keyframes f{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}.f{animation:f .5s ease-out both}"
-    write("scoreboard.svg", svg(1200, 2 * th + gap, body, css, "Competition results"))
+    write("scoreboard.svg", svg(1199, 3 * th + 2 * gap, body, css, "Competition results"))
 
 
 def motif(kind, col):
@@ -161,19 +166,73 @@ def motif(kind, col):
             h = max((b - a) * 1.6, 2)
             bars += f'<rect x="{i * 6 + 8}" y="{96 - h:.1f}" width="34" height="{h:.1f}" rx="2" fill="{col}" opacity=".28"/>'
         return bars + f'<polyline points="{" ".join(pts)}" fill="none" stroke="{col}" stroke-width="3"/>'
+    if kind == "pairs":
+        a, b = [], []
+        for x in range(0, 91):
+            t = 30 + 18 * math.sin(x / 13) + r.uniform(-2, 2)
+            a.append(f"{x * 6},{t:.1f}")
+            b.append(f"{x * 6},{t + 26 + 11 * math.sin(x / 5) + r.uniform(-2, 2):.1f}")
+        return (f'<polyline points="{" ".join(a)}" fill="none" stroke="{col}" stroke-width="2.5"/>'
+                f'<polyline points="{" ".join(b)}" fill="none" stroke="{MUTED}" stroke-width="2"/>')
+    if kind == "board":
+        out = ""
+        for row in range(4):
+            for c in range(22):
+                v = r.random()
+                fill = "#1a2330" if v < .74 else "#2a3543" if v < .88 else col if v < .95 else RED
+                cls = ' class="u"' if fill in (col, RED) else ""
+                out += f'<rect{cls} x="{c * 24.5}" y="{row * 24.5}" width="21" height="21" rx="3" fill="{fill}"/>'
+        return out
+    if kind == "cube":
+        faces = [RED, GREEN, BLUE, AMBER, TEXT, "#2a3543"]
+        out = ""
+        for f in range(4):
+            for i in range(9):
+                out += f'<rect x="{f * 138 + (i % 3) * 32}" y="{(i // 3) * 32}" width="28" height="28" rx="4" fill="{r.choice(faces)}"/>'
+        return out
+    if kind == "steps":
+        vals = [20, 26, 22, 34, 38, 34, 48, 54, 50, 62, 72, 68, 80, 88]
+        pts = " ".join(f"{i * 41.5:.1f},{96 - v}" for i, v in enumerate(vals))
+        dots = "".join(f'<circle cx="{i * 41.5:.1f}" cy="{96 - v}" r="4" fill="{col}"/>' for i, v in enumerate(vals))
+        return f'<polyline points="{pts}" fill="none" stroke="{col}" stroke-width="2.5"/>{dots}'
+    if kind == "sort":
+        vals = [40, 88, 24, 66, 52, 16, 76, 34, 94, 46, 60, 28, 82, 20, 70]
+        out = ""
+        for i, v in enumerate(vals):
+            fill = AMBER if i in (4, 5) else col
+            out += f'<rect x="{i * 36.5:.1f}" y="{96 - v}" width="28" height="{v}" rx="3" fill="{fill}" class="g" style="animation-delay:{i * .05:.2f}s"/>'
+        return out
+    if kind == "agents":
+        cx, cy = 270, 48
+        nodes = [(cx + 230 * math.cos(a), cy + 40 * math.sin(a)) for a in [i * math.tau / 7 for i in range(7)]]
+        out = "".join(f'<path d="M{cx} {cy}L{x:.1f} {y:.1f}" stroke="{col}" stroke-width="2" stroke-dasharray="6 6" opacity=".6" class="d"/>' for x, y in nodes)
+        out += "".join(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="9" fill="{PANEL}" stroke="{col}" stroke-width="2.5"/>' for x, y in nodes)
+        return out + f'<circle cx="{cx}" cy="{cy}" r="14" fill="{col}"/>'
+    if kind == "draw":
+        pts = " ".join(f"{x * 3},{48 + 28 * math.sin(x / 9) * math.cos(x / 23):.1f}" for x in range(0, 75))
+        return (f'<polyline points="{pts}" fill="none" stroke="{col}" stroke-width="3" stroke-linecap="round"/>'
+                f'<rect x="262" y="16" width="96" height="64" rx="4" fill="none" stroke="{AMBER}" stroke-width="2.5"/>'
+                f'<circle cx="425" cy="48" r="33" fill="none" stroke="{BLUE}" stroke-width="2.5"/>'
+                f'<path d="M478 76L530 22M530 22h-20M530 22v20" fill="none" stroke="{RED}" stroke-width="2.5"/>')
     return ""
 
 
 def cards():
-    data = [("iicpc", "iicpc-platform", "Hosts trading engines in gVisor sandboxes, attacks them with a distributed bot fleet and ranks them live on latency and throughput.", ["Go", "Kubernetes", "gVisor"], "bars", GREEN),
+    data = [("iicpc", "iicpc-platform", "Hosts trading engines in gVisor sandboxes, drives them with a 5,000-bot fleet at 13K requests/s, and ranks them live on latency and correctness.", ["Go", "Kubernetes", "gVisor"], "bars", GREEN),
             ("options", "Options-Pricing-Volatility-Research", "Arbitrage-free implied-volatility surface and delta-hedged backtest on real option quotes, testing the variance risk premium after costs.", ["Python", "SVI", "Greeks"], "smile", AMBER),
+            ("exec", "Almgren-Chriss", "Optimal execution that splits large orders over time to balance market impact against price risk, in one and two assets.", ["Python", "Execution", "Market impact"], "exec", RED),
+            ("pairs", "Pairs-Trading", "Statistical arbitrage research: finds cointegrated pairs and trades the spread between them.", ["Python", "Cointegration", "Stat arb"], "pairs", BLUE),
+            ("battlecode", "Cambridge Battlecode bot", "C++ team bot for a strategy game AI competition. International ladder rank 21 of 517, with 2,300+ ranked matches.", ["C++", "Game AI", "Team of 3"], "board", VIOLET),
+            ("rubik", "Rubik-s-Cube-Solver", "C++ cube simulator with 1D array, 3D array and bitboard models, solved with search and pattern databases.", ["C++", "Search", "Bitboards"], "cube", AMBER),
+            ("cf", "Codeforces-Analyzer", "Timed Codeforces practice that estimates a rating from problem difficulty, solve time, attempts and hints.", ["React", "Chart.js", "Live demo"], "steps", GREEN),
+            ("viz", "Algorithm-Visualizer", "Interactive web app that shows fundamental algorithms one operation at a time.", ["React", "Algorithms", "Live demo"], "sort", BLUE),
             ("mssa", "robust-mssa", "Robust multivariate singular spectrum analysis that extracts latent factors from financial time series containing sparse outliers.", ["Python", "Time series", "Research"], "series", BLUE),
-            ("nlp", "nlp-seq2seq-title-generation", "Generates Wikipedia article titles from body text, comparing GRU encoder-decoders with pretrained T5 models using ROUGE.", ["PyTorch", "Hugging Face", "NLP"], "seq", VIOLET),
-            ("exec", "Almgren-Chriss", "Almgren-Chriss optimal execution: splits large orders over time to balance market impact against price risk, in one and two assets.", ["Python", "Execution", "Market impact"], "exec", RED),
-            ("split", "spliteasy", "Splitwise-style expense sharing with groups, flexible splits, expense chat and settle-up. Deployed with a live demo.", ["Next.js", "Postgres", "Prisma"], "graph", GREEN)]
+            ("agents", "private-multi-agent-llm", "Optimizes privacy-utility trade-offs in distributed large language model agent networks using metaheuristic search.", ["Python", "LLM agents", "Research"], "agents", VIOLET),
+            ("split", "spliteasy", "Splitwise-style expense sharing with groups, flexible splits, expense chat and settle-up.", ["Next.js", "Postgres", "Live demo"], "graph", GREEN),
+            ("board", "Whiteboard", "Drawing app with accounts, saved canvases and real-time sync over Socket.IO.", ["React", "Socket.IO", "Live demo"], "draw", AMBER)]
     for key, name, desc, tags, kind, col in data:
         W, H = 590, 290
-        txt = "".join(f'<text x="24" y="{190 + i * 21}" font-family="{SANS}" font-size="14.5" fill="{MUTED}">{escape(l)}</text>' for i, l in enumerate(wrap(desc, 72)))
+        txt = "".join(f'<text x="24" y="{190 + i * 22}" font-family="{SANS}" font-size="16" fill="{MUTED}">{escape(l)}</text>' for i, l in enumerate(wrap(desc, 68)))
         x, chips = 24, ""
         for t in tags:
             w = len(t) * 7.6 + 20
@@ -182,9 +241,10 @@ def cards():
             x += w + 8
         body = (f'<rect x=".5" y=".5" width="{W - 1}" height="{H - 1}" rx="12" fill="{PANEL}" stroke="{LINE}"/>'
                 f'<g transform="translate(25 24)">{motif(kind, col)}</g>'
-                f'<text x="24" y="161" font-family="{SANS}" font-size="22" font-weight="700" fill="{TEXT}">{escape(name)}</text>{txt}{chips}')
+                f'<text x="24" y="161" font-family="{SANS}" font-size="23" font-weight="700" fill="{TEXT}">{escape(name)}</text>{txt}{chips}')
         css = ("@keyframes g{from{opacity:0;transform:translateY(12px)}}.g{animation:g .6s ease-out both}"
-               "@keyframes d{to{stroke-dashoffset:-24}}.d{animation:d 1.4s linear infinite}")
+               "@keyframes d{to{stroke-dashoffset:-24}}.d{animation:d 1.4s linear infinite}"
+               "@keyframes u{50%{opacity:.35}}.u{animation:u 2.2s ease-in-out infinite}")
         write(f"card-{key}.svg", svg(W, H, body, css, name))
 
 
@@ -269,7 +329,7 @@ if __name__ == "__main__":
         scoreboard()
         cards()
         buttons()
-        for name, text in (("results", "cat results.log"), ("work", "ls ~/selected-work"), ("live", "watch stats"),
+        for name, text in (("results", "cat results.log"), ("trading", "ls ~/trading"), ("algo", "ls ~/algorithms-and-bots"), ("research", "ls ~/research"), ("apps", "ls ~/apps"), ("live", "watch stats"),
                            ("stack", "which tools"), ("activity", "git log --graph")):
             title(name, text)
     live()

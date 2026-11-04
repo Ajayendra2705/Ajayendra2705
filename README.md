@@ -7,16 +7,34 @@
 </p>
 
 <img src="assets/title-results.svg" width="100%" alt="Results">
-<p align="center"><img src="assets/scoreboard.svg" width="100%" alt="AMS Derive rank 6 of 2,500+. Codeforces max rating 1955, Candidate Master, 2,500+ problems solved. CodeChef max rating 1979, 4 Star. Ramanujan Maths Competition Round 1 rank 6. IICPC QuantFest coding round rank 21. Akuna trading challenge 18.7 of 20. QuantStorm top 40 finalist."></p>
+<p align="center"><img src="assets/scoreboard.svg" width="100%" alt="AMS Derive national rank 6 of 2,500+. IMC Prosperity 4 global manual trading rank 24. Codeforces max rating 1955, Candidate Master, and CodeChef 4 Star. IICPC QuantFest coding round rank 21. QuantStorm top 40 finalist. Akuna trading challenge 18.7 of 20. IICPC Codefest Prelims rank 356 of 13,800+. Cambridge Battlecode international ladder rank 21 of 517. Integral Cup top 400 of 3,100+."></p>
 
-<img src="assets/title-work.svg" width="100%" alt="Selected work">
+<img src="assets/title-trading.svg" width="100%" alt="Trading">
 <p align="center">
   <a href="https://github.com/Ajayendra2705/iicpc-platform"><img src="assets/card-iicpc.svg" width="49%" alt="iicpc-platform"></a>
   <a href="https://github.com/Ajayendra2705/Options-Pricing-Volatility-Research"><img src="assets/card-options.svg" width="49%" alt="Options-Pricing-Volatility-Research"></a>
-  <a href="https://github.com/Ajayendra2705/robust-mssa"><img src="assets/card-mssa.svg" width="49%" alt="robust-mssa"></a>
-  <a href="https://github.com/Ajayendra2705/nlp-seq2seq-title-generation"><img src="assets/card-nlp.svg" width="49%" alt="nlp-seq2seq-title-generation"></a>
   <a href="https://github.com/Ajayendra2705/Almgren-Chriss"><img src="assets/card-exec.svg" width="49%" alt="Almgren-Chriss"></a>
+  <a href="https://github.com/Ajayendra2705/Pairs-Trading"><img src="assets/card-pairs.svg" width="49%" alt="Pairs-Trading"></a>
+</p>
+
+<img src="assets/title-algo.svg" width="100%" alt="Algorithms and bots">
+<p align="center">
+  <a href="https://2026a.battlecode.co.uk"><img src="assets/card-battlecode.svg" width="49%" alt="Cambridge Battlecode bot"></a>
+  <a href="https://github.com/Ajayendra2705/Rubik-s-Cube-Solver"><img src="assets/card-rubik.svg" width="49%" alt="Rubik-s-Cube-Solver"></a>
+  <a href="https://github.com/Ajayendra2705/Codeforces-Analyzer"><img src="assets/card-cf.svg" width="49%" alt="Codeforces-Analyzer"></a>
+  <a href="https://github.com/Ajayendra2705/Algorithm-Visualizer"><img src="assets/card-viz.svg" width="49%" alt="Algorithm-Visualizer"></a>
+</p>
+
+<img src="assets/title-research.svg" width="100%" alt="Research">
+<p align="center">
+  <a href="https://github.com/Ajayendra2705/robust-mssa"><img src="assets/card-mssa.svg" width="49%" alt="robust-mssa"></a>
+  <a href="https://github.com/Ajayendra2705/private-multi-agent-llm"><img src="assets/card-agents.svg" width="49%" alt="private-multi-agent-llm"></a>
+</p>
+
+<img src="assets/title-apps.svg" width="100%" alt="Apps">
+<p align="center">
   <a href="https://github.com/Ajayendra2705/spliteasy"><img src="assets/card-split.svg" width="49%" alt="spliteasy"></a>
+  <a href="https://github.com/Ajayendra2705/Whiteboard"><img src="assets/card-board.svg" width="49%" alt="Whiteboard"></a>
 </p>
 
 <img src="assets/title-live.svg" width="100%" alt="Live stats">
