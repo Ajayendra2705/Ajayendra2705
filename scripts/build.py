@@ -44,7 +44,7 @@ def hero():
     body = (f'<rect x=".5" y=".5" width="{W - 1}" height="{H - 1}" rx="12" fill="{PANEL}" stroke="{LINE}"/>'
             f'<text x="48" y="104" font-family="{SANS}" font-size="60" font-weight="700" fill="{TEXT}">Ajayendra Bansod</text>'
             f'<text x="50" y="152" font-family="{MONO}" font-size="19" fill="{MUTED}">Trading systems, quant research and algorithms. IIT Kharagpur, Class of 2027.</text>')
-    write("hero.svg", svg(W, H, body, "", "Ajayendra Bansod: trading systems, quant research and algorithms. IIT Kharagpur, Class of 2027."))
+    write("header.svg", svg(W, H, body, "", "Ajayendra Bansod: trading systems, quant research and algorithms. IIT Kharagpur, Class of 2027."))
 
 
 def title(name, text):
